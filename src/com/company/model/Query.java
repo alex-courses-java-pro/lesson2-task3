@@ -1,34 +1,35 @@
 package com.company.model;
 
 
-import java.util.List;
+import java.util.Arrays;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Created by arahis on 4/17/17.
  */
-@XmlRootElement
+@XmlRootElement(name = "query")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Query {
+
+    @XmlAttribute(name = "count", namespace = "http://www.yahooapis.com/v1/base.rng")
     private int count;
+    @XmlAttribute(name = "created", namespace = "http://www.yahooapis.com/v1/base.rng")
     private String created;
+    @XmlAttribute(name = "lang", namespace = "http://www.yahooapis.com/v1/base.rng")
     private String lang;
-    private Results results;
+    @XmlElementWrapper(name="results")
+    @XmlElement(name = "rate")
+    private Rate[] rates;
 
     public Query() {
     }
 
-    public Query(int count, String created, String lang, Results results) {
-        super();
-        this.count = count;
-        this.created = created;
-        this.lang = lang;
-        this.results = results;
-    }
-
-    @XmlAttribute
     public int getCount() {
         return count;
     }
@@ -37,7 +38,6 @@ public class Query {
         this.count = count;
     }
 
-    @XmlAttribute
     public String getCreated() {
         return created;
     }
@@ -46,7 +46,6 @@ public class Query {
         this.created = created;
     }
 
-    @XmlAttribute
     public String getLang() {
         return lang;
     }
@@ -55,13 +54,12 @@ public class Query {
         this.lang = lang;
     }
 
-    @XmlElement
-    public Results getResults() {
-        return results;
+    public Rate[] getRates() {
+        return rates;
     }
 
-    public void setResults(Results results) {
-        this.results = results;
+    public void setRates(Rate[] rates) {
+        this.rates = rates;
     }
 
     @Override
@@ -70,7 +68,7 @@ public class Query {
                 "count=" + count +
                 ", created='" + created + '\'' +
                 ", lang='" + lang + '\'' +
-                ", results=" + results +
+                ", rates=" + Arrays.toString(rates) +
                 '}';
     }
 }

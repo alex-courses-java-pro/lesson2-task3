@@ -13,7 +13,7 @@ import javax.xml.bind.Unmarshaller;
  */
 public class ParseUtils {
 
-    public static Query parseYahooFinanceResponse(String xml) throws UnmarshalException {
+    public static Query parseYahooFinanceResponseXml(String xml) throws UnmarshalException {
         Query query = null;
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(Query.class);

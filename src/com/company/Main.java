@@ -5,30 +5,20 @@ import com.company.model.Query;
 import javax.xml.bind.UnmarshalException;
 
 public class Main {
-private static String XML = "<query xmlns:yahoo=\"http://www.yahooapis.com/v1/base.rng\" yahoo:count=\"2\" yahoo:created=\"2017-04-16T23:52:04Z\" yahoo:lang=\"en-US\">\n" +
-        "<results>\n" +
-        "<rate id=\"USDUAH\">\n" +
-        "<Name>USD/UAH</Name>\n" +
-        "<Rate>26.8050</Rate>\n" +
-        "<Date>4/16/2017</Date>\n" +
-        "<Time>6:11pm</Time>\n" +
-        "<Ask>27.0550</Ask>\n" +
-        "<Bid>26.8050</Bid>\n" +
-        "</rate>\n" +
-        "<rate id=\"USDEUR\">\n" +
-        "<Name>USD/EUR</Name>\n" +
-        "<Rate>0.9424</Rate>\n" +
-        "<Date>4/16/2017</Date>\n" +
-        "<Time>11:34pm</Time>\n" +
-        "<Ask>0.9429</Ask>\n" +
-        "<Bid>0.9424</Bid>\n" +
-        "</rate>\n" +
-        "</results>\n" +
-        "</query>";
-
 
     public static void main(String[] args) throws UnmarshalException {
-        Query query = ParseUtils.parseYahooFinanceResponse(XML);
+
+        String response = HttpUtils.sendGet("http://query.yahooapis.com/v1/public/yql?format=xml&q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22USDUAH%22,%20%22USDEUR%22)&env=store://datatables.org/alltableswithkeys");
+        System.out.println("response from yahoo");
+        System.out.println("-----------------------");
+        System.out.println(response);
+        System.out.println("-----------------------");
+        System.out.println();
+
+        Query query = ParseUtils.parseYahooFinanceResponseXml(response);
+        System.out.println("parsed response");
+        System.out.println("-----------------------");
         System.out.println(query.toString());
+        System.out.println("-----------------------");
     }
 }

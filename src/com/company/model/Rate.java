@@ -1,38 +1,37 @@
 package com.company.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 
 /**
  * Created by arahis on 4/17/17.
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Rate {
-    private String id;
+    @XmlAttribute(name="id")
+    private String rateId;
+    @XmlElement(name="Name")
     private String name;
+    @XmlElement(name="Date")
     private String date;
+    @XmlElement(name="Time")
     private String time;
+    @XmlElement(name="Ask")
     private String ask;
+    @XmlElement(name="Bid")
     private String bid;
 
     public Rate() {
     }
 
-    public Rate(String id, String name, String date, String time, String ask, String bid) {
-        super();
-        this.id = id;
-        this.name = name;
-        this.date = date;
-        this.time = time;
-        this.ask = ask;
-        this.bid = bid;
+    public String getRateId() {
+        return rateId;
     }
 
-    @XmlAttribute
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public void setRateId(String rateId) {
+        this.rateId = rateId;
     }
 
     public String getName() {
@@ -78,7 +77,7 @@ public class Rate {
     @Override
     public String toString() {
         return "Rate{" +
-                "id='" + id + '\'' +
+                "rateId='" + rateId + '\'' +
                 ", name='" + name + '\'' +
                 ", date='" + date + '\'' +
                 ", time='" + time + '\'' +
